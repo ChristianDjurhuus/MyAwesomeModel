@@ -2,7 +2,7 @@ import argparse
 import sys
 
 import torch
-
+import numpy as np
 from data import mnist
 from model import MyAwesomeModel
 import matplotlib.pyplot as plt
@@ -60,7 +60,7 @@ class TrainOREvaluate(object):
                 running_loss += loss.item()
 
             print('[%d] loss: %.3f' %
-                  (e + 1, running_loss / 1000))
+                  (e + 1, running_loss / len(train_set)))
             running_loss = 0.0
 
 
@@ -87,6 +87,7 @@ class TrainOREvaluate(object):
         model.load_state_dict(state_dict)
         _, test_set = mnist()
         model.eval()
+        accuracies = []
         with torch.no_grad():
             for images, labels in test_set:
                 images = images.unsqueeze(1)
@@ -96,9 +97,9 @@ class TrainOREvaluate(object):
                 top_p, top_class = ps.topk(1, dim=1)
                 equals = top_class == labels.view(*top_class.shape)
                 accuracy = torch.mean(equals.type(torch.FloatTensor))
-                print(f'Accuracy: {accuracy.item() * 100}%')
-
-
+                #print(f'Accuracy: {accuracy.item() * 100}%')
+                accuracies.append(accuracy)
+        print('Estimate of accuracy: ', np.mean(accuracies))
 
 if __name__ == '__main__':
     TrainOREvaluate()
