@@ -1,5 +1,6 @@
-import numpy as np
 import os
+
+import numpy as np
 
 path = '/Users/christiandjurhuus/Documents/DTU/6_semester/ml_ops/dtu_mlops/data/corruptmnist/'
 os.chdir(path)

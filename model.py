@@ -1,12 +1,13 @@
-from torch import nn
 import torch.nn.functional as F
+from torch import nn
 
-#Just starting with vanilla model
+
+# Just starting with vanilla model
 class MyAwesomeModel(nn.Module):
     def __init__(self):
         super().__init__()
 
-        #We should use convolutional layers because they are known to be translational invariant
+        # We should use convolutional layers because they are known to be translational invariant
         # Convolutional layers
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
         self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
@@ -14,7 +15,6 @@ class MyAwesomeModel(nn.Module):
         # fully connected layers
         self.fc1 = nn.Linear(320, 50)
         self.output = nn.Linear(50, 10)
-
 
     def forward(self, x):
         # Convolutional and maxpoolinf
