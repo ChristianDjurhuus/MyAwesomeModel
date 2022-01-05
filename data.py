@@ -13,7 +13,7 @@ def mnist():
                                     transforms.Normalize((0.5,), (0.5,)),
                                     ])
 
-    path  = '/Users/christiandjurhuus/Documents/DTU/6_semester/ml_ops/dtu_mlops/data/corruptmnist/'
+    path  = './data/corruptmnist/'
     # Download and load the training data
     train = np.load(path + "training_data.npz")
     images = torch.Tensor(train.f.images)
